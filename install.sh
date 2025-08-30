@@ -70,7 +70,7 @@ sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap
 sudo mkinitcpio -P
 
 echo "Cleaning up..."
-yay -Rns $(yay -Qdtq)
-yay -Scc
+yay -Rns --noconfirm $(yay -Qdtq)
+yay -Scc --noconfirm
 
 echo "Installation finished. Please reboot the computer"
