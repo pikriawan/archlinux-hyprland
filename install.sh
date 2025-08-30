@@ -13,7 +13,7 @@ makepkg -si --noconfirm
 cd ~
 
 echo "Installing packages..."
-yay -S --needed --noconfirm hyprland hyprpaper hypridle hyprlock xdg-desktop-portal-hyprland hyprpolkitagent uwsm libnewt dunst pipewire wireplumber qt5-wayland qt6-wayland inter-font ttf-jetbrains-mono noto-fonts ttf-noto-nerd waybar rofi-wayland cliphist nautilus xdg-desktop-portal-gtk wiremix espeakup brightnesscl jq gvfs wget tree man-db nodejs-lts-jod npm jdk-openjdk php apache php-apache mariadb alacritty htop blueberry visual-studio-code-bin baobab decibels gnome-calculator gnome-calendar gnome-clocks gnome-disk-utility gnome-maps gnome-music gnome-text-editor gnome-weather loupe papers showtime snapshot sushi file-roller
+yay -S --needed --noconfirm hyprland hyprpaper hypridle hyprlock xdg-desktop-portal-hyprland hyprpolkitagent uwsm libnewt dunst pipewire wireplumber qt5-wayland qt6-wayland inter-font ttf-jetbrains-mono noto-fonts ttf-noto-nerd waybar rofi-wayland cliphist nautilus xdg-desktop-portal-gtk wiremix speech-dispatcher espeakup brightnesscl jq gvfs wget tree man-db nodejs-lts-jod npm jdk-openjdk php apache php-apache mariadb alacritty htop blueberry visual-studio-code-bin firefox baobab decibels gnome-calculator gnome-calendar gnome-clocks gnome-disk-utility gnome-maps gnome-music gnome-text-editor gnome-weather loupe papers showtime snapshot sushi file-roller
 
 yay -S --needed --noconfirm --asdeps gvfs-mtp rtkit noto-fonts-cjk noto-fonts-emoji noto-fonts-extra arj binutils bzip3 cdrtools cpio dpkg lhasa lrzip 7zip rpmextract squashfs-tools unace unrar unzip zip
 
@@ -37,9 +37,6 @@ tar -xf bin.tar.xz -C .local
 rm bin.tar.xz
 
 echo "Configuring applications..."
-
-# Speech dispatcher
-spd-conf
 
 # GTK
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
