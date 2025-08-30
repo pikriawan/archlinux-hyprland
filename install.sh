@@ -9,7 +9,7 @@ sudo pacman -S --needed --noconfirm base-devel git
 cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
-makepkg -si
+makepkg -si --noconfirm
 cd ~
 
 echo "Installing packages..."
