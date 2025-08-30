@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-
 cd ~
 
 echo "Installing yay..."
