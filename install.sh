@@ -32,7 +32,8 @@ sed -i "s|@HOME@|$HOME|g" .config/waybar/style.css
 
 echo "Copying executables..."
 curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/bin.tar.xz
-tar -xf bin.tar.xz -C .local/bin
+mkdir -p .local
+tar -xf bin.tar.xz -C .local
 rm bin.tar.xz
 
 echo "Configuring applications..."
