@@ -4,6 +4,7 @@ set -e
 cd ~
 
 echo "Installing yay..."
+sudo pacman -S --asdeps go
 sudo pacman -S --noconfirm base-devel git
 cd /tmp
 git clone https://aur.archlinux.org/yay.git
