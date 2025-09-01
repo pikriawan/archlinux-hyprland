@@ -1,0 +1,16 @@
+#!/bin/bash
+msg_tag="brightness"
+
+max_brightness=$(brightnessctl max)
+min_brightness=$(expr $max_brightness / 10)
+step=$(expr $(expr $max_brightness - $min_brightness) / 10)
+
+if [ "$@" = "inc" ]; then
+    brightnessctl set ${step}+
+else
+    brightnessctl -n${min_brightness} set ${step}-
+fi
+
+current_brightness=$(brightnessctl get)
+percentage=$(expr $(expr $current_brightness - $min_brightness) \* 100 / $(expr $max_brightness - $min_brightness))
+dunstify -a "Brightness" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Brightness: ${percentage}%"

@@ -1,0 +1,22 @@
+#!/bin/bash
+msg_tag="volume"
+
+if [ "$@" = "mut" ]; then
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+elif [ "$@" = "inc" ]; then
+    wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+else
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+fi
+
+current_volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}' | sed 's/\.//g')
+percentage=$(expr $current_volume \* 1)
+mute=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}')
+
+if [ "$mute" = "[MUTED]" ]; then
+    dunstify -a "Volume" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Volume: ${percentage}% (muted)"
+else
+    dunstify -a "Volume" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Volume: ${percentage}%"
+fi
+
+canberra-gtk-play -i audio-volume-change -d "volume"

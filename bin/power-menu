@@ -1,0 +1,17 @@
+#!/bin/bash
+selection=$(echo -e "Lock\nSuspend\nReboot\nShutdown" | rofi -dmenu -p "mode_off_on")
+
+case $selection in
+    "Lock")
+        pidof hyprlock || hyprlock
+        ;;
+    "Suspend")
+        systemctl suspend
+        ;;
+    "Reboot")
+        systemctl reboot
+        ;;
+    "Shutdown")
+        systemctl poweroff
+        ;;
+esac

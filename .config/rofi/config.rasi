@@ -1,0 +1,74 @@
+configuration {
+    modes: [ drun ];
+
+    drun {
+        display-name: "search";
+    }
+}
+
+@theme "/dev/null"
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+window {
+    border: 1px;
+    border-color: #444b6a;
+    border-radius: 12px;
+    background-color: #1a1b26;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    spacing: 16px;
+    padding: 16px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    font: "Material Symbols Outlined 28pt 16";
+    text-color: #444b6a;
+    vertical-align: 0.5;
+}
+
+entry {
+    font: "Inter 16";
+    text-color: #a9b1d6;
+    cursor-color: #444b6a;
+    placeholder: "Search";
+    placeholder-color: #444b6a;
+    vertical-align: 0.5;
+}
+
+listview {
+    lines: 8;
+    border: 1px 0 0 0;
+    border-color: #444b6a;
+    padding: 8px;
+}
+
+element {
+    padding: 8px;
+    border-radius: 8px;
+}
+
+element selected {
+    background-color: #a9b1d6;
+}
+
+element-text {
+    font: "Inter 12";
+    text-color: #a9b1d6;
+    highlight: none;
+}
+
+element-text selected {
+    text-color: #1a1b26;
+}

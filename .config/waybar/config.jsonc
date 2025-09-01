@@ -1,0 +1,94 @@
+{
+    "layer": "top",
+    "height": 32,
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["battery", "network", "custom/app-launcher", "wireplumber", "bluetooth", "custom/power-menu"],
+    "hyprland/workspaces": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+    "clock": {
+        "format": "{:%R}",
+        "tooltip-format": "{:%a %b %d %R}",
+        "on-click": "gnome-calendar",
+        "interval": 1
+    },
+    "battery": {
+        "format": "{icon}",
+        "format-plugged": "power",
+        "format-icons": [
+            "battery_android_0",
+            "battery_android_frame_1",
+            "battery_android_frame_2",
+            "battery_android_frame_3",
+            "battery_android_frame_4",
+            "battery_android_frame_5",
+            "battery_android_frame_6",
+            "battery_android_frame_full"
+        ],
+        "tooltip-format": "{capacity}%",
+        "tooltip-format-charging": "{capacity}% (charging)",
+        "interval": 1
+    },
+    "network": {
+        "format": "signal_wifi_off",
+        "format-ethernet": "lan",
+        "format-wifi": "{icon}",
+        "format-linked": "lan",
+        "format-disconnected": "signal_wifi_bad",
+        "format-disabled": "signal_wifi_off",
+        "format-icons": {
+            "wifi": [
+                "signal_wifi_0_bar",
+                "network_wifi_1_bar",
+                "network_wifi_2_bar",
+                "network_wifi_3_bar",
+                "signal_wifi_4_bar"
+            ]
+        },
+        "tooltip-format": "Disconnected",
+        "tooltip-format-ethernet": "Ethernet",
+        "tooltip-format-wifi": "{essid}",
+        "tooltip-format-disconnected": "Disconnected",
+        "tooltip-format-disabled": "Disabled",
+        "on-click": "alacritty --class nmtui --command nmtui",
+        "interval": 5
+    },
+    "custom/app-launcher": {
+        "format": "search",
+        "tooltip-format": "App launcher",
+        "on-click": "rofi -show drun -drun-display-format {name}"
+    },
+    "wireplumber": {
+        "format": "{icon}",
+        "format-muted": "no_sound",
+        "format-icons": [
+            "volume_mute",
+            "volume_down",
+            "volume_up"
+        ],
+        "tooltip-format": "{volume}%",
+        "on-click": "alacritty --class wiremix --command wiremix"
+    },
+    "bluetooth": {
+        "format": "bluetooth_disabled",
+        "format-disabled": "bluetooth_disabled",
+        "format-off": "bluetooth_disabled",
+        "format-on": "bluetooth",
+        "format-connected": "bluetooth_connected",
+        "tooltip-format": "Disabled",
+        "tooltip-format-disabled": "Disabled",
+        "tooltip-format-off": "Off",
+        "tooltip-format-on": "On",
+        "tooltip-format-connected": "Connected",
+        "on-click": "blueberry"
+    },
+    "custom/power-menu": {
+        "format": "mode_off_on",
+        "tooltip-format": "Power menu",
+        "on-click": "power-menu"
+    }
+}

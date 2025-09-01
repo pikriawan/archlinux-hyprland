@@ -1,0 +1,87 @@
+* {
+    all: unset;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+}
+
+#waybar {
+    background-color: #1a1b26;
+    color: #a9b1d6;
+}
+
+#workspaces button {
+    padding-left: 16px;
+    background-image: url("@HOME@/.config/waybar/icons/workspace.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 8px;
+}
+
+#workspaces button:first-child {
+    padding-left: 28px;
+    background-position: 16px center;
+}
+
+#workspaces button.active {
+    padding-left: 32px;
+    background-image: url("@HOME@/.config/waybar/icons/workspace-active.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 24px 8px;
+}
+
+#workspaces button.active:first-child {
+    padding-left: 44px;
+    background-position: 16px center;
+}
+
+#battery {
+    padding: 0 8px;
+    font-family: "Material Symbols Outlined 28pt", sans-serif;
+    font-size: 16px;
+}
+
+#battery.charging {
+    color: #9ece6a;
+}
+
+#network {
+    padding: 0 8px;
+    font-family: "Material Symbols Outlined 28pt", sans-serif;
+    font-size: 16px;
+}
+
+#custom-app-launcher {
+    padding: 0 8px;
+    font-family: "Material Symbols Outlined 28pt", sans-serif;
+    font-size: 16px;
+}
+
+#wireplumber {
+    padding: 0 8px;
+    font-family: "Material Symbols Outlined 28pt", sans-serif;
+    font-size: 16px;
+}
+
+#bluetooth {
+    padding: 0 8px;
+    font-family: "Material Symbols Outlined 28pt", sans-serif;
+    font-size: 16px;
+}
+
+#custom-power-menu {
+    padding: 0 16px 0 8px;
+    font-family: "Material Symbols Outlined 28pt", sans-serif;
+    font-size: 16px;
+}
+
+tooltip {
+    background-color: #1a1b26;
+    box-shadow: 0 0 0 1px #444b6a inset;
+    border-radius: 12px;
+}
+
+tooltip label {
+    padding: 8px;
+    color: #a9b1d6;
+}
