@@ -1,5 +1,4 @@
 #!/bin/bash
-
 screenshot() {
     directory=$(xdg-user-dir PICTURES)/Screenshots
     file=$(date +"Screenshot_%Y%m%d_%H%M%S.png")
