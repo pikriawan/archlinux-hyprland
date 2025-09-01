@@ -15,7 +15,7 @@ case $selection in
             exit 1
         fi
 
-        grim -g "$geometry" - | magick - -shave 1x1 PNG:- | tee "$directory/$file" | wl-copy
+        wayfreeze --after-freeze-cmd 'grim -g "$geometry" - | magick - -shave 1x1 PNG:- | tee "$directory/$file" | wl-copy; killall wayfreeze'
         dunstify -a "Screenshot" "Screenshot saved"
         ;;
     "Window")
@@ -25,11 +25,11 @@ case $selection in
             exit 1
         fi
 
-        grim -g "$geometry" - | tee "$directory/$file" | wl-copy
+        wayfreeze --after-freeze-cmd 'grim -g "$geometry" - | tee "$directory/$file" | wl-copy; killall wayfreeze'
         dunstify -a "Screenshot" "Screenshot saved"
         ;;
     "Screen")
-        grim - | tee "$directory/$file" | wl-copy
+        wayfreeze --after-freeze-cmd 'grim - | tee "$directory/$file" | wl-copy; killall wayfreeze'
         dunstify -a "Screenshot" "Screenshot saved"
         ;;
 esac
