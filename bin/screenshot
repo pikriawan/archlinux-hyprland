@@ -1,35 +1,39 @@
 #!/bin/bash
 
-directory=$(xdg-user-dir PICTURES)/Screenshots
-file=$(date +"Screenshot_%Y%m%d_%H%M%S.png")
+screenshot() {
+    directory=$(xdg-user-dir PICTURES)/Screenshots
+    file=$(date +"Screenshot_%Y%m%d_%H%M%S.png")
 
-mkdir -p $directory
+    mkdir -p $directory
 
-selection=$(echo -e "Selection\nWindow\nScreen" | rofi -dmenu -p "screenshot_frame_2")
+    selection=$(echo -e "Selection\nWindow\nScreen" | rofi -dmenu -p "screenshot_frame_2")
 
-case $selection in
-    "Selection")
-        geometry=$(slurp)
+    case $selection in
+        "Selection")
+            geometry=$(slurp)
 
-        if [ -z "$geometry" ]; then
-            exit 1
-        fi
+            if [ -z "$geometry" ]; then
+                exit 1
+            fi
 
-        wayfreeze --after-freeze-cmd 'grim -g "$geometry" - | magick - -shave 1x1 PNG:- | tee "$directory/$file" | wl-copy; killall wayfreeze'
-        dunstify -a "Screenshot" "Screenshot saved"
-        ;;
-    "Window")
-        geometry=$(hyprctl activewindow -j | jq -j '.at[0],",",.at[1]," ",.size[0],"x",.size[1]')
+            grim -g "$geometry" - | magick - -shave 1x1 PNG:- | tee "$directory/$file" | wl-copy
+            dunstify -a "Screenshot" "Screenshot saved"
+            ;;
+        "Window")
+            geometry=$(hyprctl activewindow -j | jq -j '.at[0],",",.at[1]," ",.size[0],"x",.size[1]')
 
-        if [ "$geometry" = "null,null nullxnull" ]; then
-            exit 1
-        fi
+            if [ "$geometry" = "null,null nullxnull" ]; then
+                exit 1
+            fi
 
-        wayfreeze --after-freeze-cmd 'grim -g "$geometry" - | tee "$directory/$file" | wl-copy; killall wayfreeze'
-        dunstify -a "Screenshot" "Screenshot saved"
-        ;;
-    "Screen")
-        wayfreeze --after-freeze-cmd 'grim - | tee "$directory/$file" | wl-copy; killall wayfreeze'
-        dunstify -a "Screenshot" "Screenshot saved"
-        ;;
-esac
+            grim -g "$geometry" - | tee "$directory/$file" | wl-copy
+            dunstify -a "Screenshot" "Screenshot saved"
+            ;;
+        "Screen")
+            grim - | tee "$directory/$file" | wl-copy
+            dunstify -a "Screenshot" "Screenshot saved"
+            ;;
+    esac
+}
+
+wayfreeze --hide-cursor & PID=$!; sleep .1; screenshot; kill $PID
