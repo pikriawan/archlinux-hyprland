@@ -1,4 +1,6 @@
 #!/bin/bash
+cd ~
+
 echo "Copying configurations..."
 curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/.config.tar.xz
 tar -xf .config.tar.xz
@@ -12,3 +14,5 @@ echo "Copying executables..."
 curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/bin.tar.xz
 tar -xf .local.tar.xz
 rm .local.tar.xz
+
+echo "Update successful"
