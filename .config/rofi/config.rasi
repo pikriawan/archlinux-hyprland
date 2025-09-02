@@ -45,7 +45,7 @@ entry {
     font: "Inter 16";
     text-color: #a9b1d6;
     cursor-color: #444b6a;
-    placeholder: "Search";
+    placeholder: "Applications";
     placeholder-color: #444b6a;
     vertical-align: 0.5;
 }
