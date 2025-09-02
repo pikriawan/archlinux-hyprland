@@ -1,5 +1,6 @@
 configuration {
     modes: [ drun ];
+    fixed-num-lines: false;
 
     drun {
         display-name: "search";
@@ -16,6 +17,8 @@ configuration {
 }
 
 window {
+    location: north;
+    y-offset: 20%;
     border: 1px;
     border-color: #444b6a;
     border-radius: 12px;
