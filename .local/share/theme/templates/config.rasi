@@ -2,7 +2,7 @@ configuration {
     modes: [ drun ];
 
     drun {
-        display-name: "search";
+        display-name: "apps";
     }
 }
 
