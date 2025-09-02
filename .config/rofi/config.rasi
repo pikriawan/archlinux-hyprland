@@ -1,9 +1,8 @@
 configuration {
     modes: [ drun ];
-    fixed-num-lines: false;
 
     drun {
-        display-name: "search";
+        display-name: "apps";
     }
 }
 
@@ -17,8 +16,6 @@ configuration {
 }
 
 window {
-    location: north;
-    y-offset: 20%;
     border: 1px;
     border-color: #444b6a;
     border-radius: 12px;
