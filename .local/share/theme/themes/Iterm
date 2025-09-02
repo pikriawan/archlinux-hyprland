@@ -1,0 +1,20 @@
+{
+    "PRIMARY_BACKGROUND":   "#101421",
+    "PRIMARY_FOREGROUND":   "#fffbf6",
+    "NORMAL_BLACK":         "#2e2e2e",
+    "NORMAL_RED":           "#eb4129",
+    "NORMAL_GREEN":         "#abe047",
+    "NORMAL_YELLOW":        "#f6c744",
+    "NORMAL_BLUE":          "#47a0f3",
+    "NORMAL_MAGENTA":       "#7b5cb0",
+    "NORMAL_CYAN":          "#64dbed",
+    "NORMAL_WHITE":         "#e5e9f0",
+    "BRIGHT_BLACK":         "#565656",
+    "BRIGHT_RED":           "#ec5357",
+    "BRIGHT_GREEN":         "#c0e17d",
+    "BRIGHT_YELLOW":        "#f9da6a",
+    "BRIGHT_BLUE":          "#49a4f8",
+    "BRIGHT_MAGENTA":       "#a47de9",
+    "BRIGHT_CYAN":          "#99faf2",
+    "BRIGHT_WHITE":         "#ffffff"
+}

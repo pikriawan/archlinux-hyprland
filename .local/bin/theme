@@ -1,0 +1,111 @@
+#!/usr/bin/env node
+const child_process = require("child_process");
+const fs = require("fs");
+const path = require("path");
+
+const themesPath = path.join(process.env.HOME, ".local/share/theme/themes");
+const themes = fs.readdirSync(themesPath);
+
+if (!themes.length) {
+    process.exit(1);
+}
+
+let selectedTheme = null;
+
+try {
+    selectedTheme = child_process.execSync(`echo -e "${themes.join("\\n")}" | rofi -dmenu -p "colors" -theme-str "entry {placeholder: \\"Theme\\";}"`, { encoding: "utf8" }).trim();
+} catch {
+    selectedTheme = null;
+}
+
+if (!selectedTheme) {
+    process.exit(1);
+}
+
+function transformTemplate(themePath, templatePath, destinationPath) {
+    try {
+        const color = JSON.parse(fs.readFileSync(themePath, "utf8"));
+
+        for (const [key, value] of Object.entries(color)) {
+            color[`${key}_RGB`] = value.replace("#", "");
+        }
+
+        let data = fs.readFileSync(templatePath, "utf8");
+
+        for (const [key, value] of Object.entries(color)) {
+            data = data.replaceAll(`@${key}@`, value);
+        }
+
+        fs.writeFileSync(destinationPath, data);
+    } catch {
+        process.exit(1);
+    }
+}
+
+// Rofi
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/config.rasi"),
+    path.join(process.env.HOME, ".config/rofi/config.rasi")
+);
+
+// Dunst
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/dunstrc"),
+    path.join(process.env.HOME, ".config/dunst/dunstrc")
+);
+
+child_process.exec("pkill dunst", () => {
+    child_process.spawn("dunst", {
+        stdio: "ignore",
+        detached: true
+    }).unref();
+});
+
+// Hyprland
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/hyprland.conf"),
+    path.join(process.env.HOME, ".config/hypr/hyprland.conf")
+);
+
+// Hyprlock
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/hyprlock.conf"),
+    path.join(process.env.HOME, ".config/hypr/hyprlock.conf")
+);
+
+// Waybar
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/style.css"),
+    path.join(process.env.HOME, ".config/waybar/style.css")
+);
+
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/workspace-active.svg"),
+    path.join(process.env.HOME, ".config/waybar/icons/workspace-active.svg")
+);
+
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/workspace.svg"),
+    path.join(process.env.HOME, ".config/waybar/icons/workspace.svg")
+);
+
+child_process.exec("pkill waybar", () => {
+    child_process.spawn("waybar", {
+        stdio: "ignore",
+        detached: true
+    }).unref();
+});
+
+// Alacritty
+transformTemplate(
+    path.join(themesPath, selectedTheme),
+    path.join(process.env.HOME, ".local/share/theme/templates/theme.toml"),
+    path.join(process.env.HOME, ".config/alacritty/theme.toml")
+);

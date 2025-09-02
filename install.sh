@@ -32,9 +32,8 @@ sed -i "s|@HOME@|$HOME|g" .config/waybar/style.css
 
 echo "Copying executables..."
 curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/bin.tar.xz
-mkdir -p .local
-tar -xf bin.tar.xz -C .local
-rm bin.tar.xz
+tar -xf .local.tar.xz
+rm .local.tar.xz
 
 echo "Copying Material fonts..."
 mkdir -p .local/share/fonts/MaterialSymbolsOutlined

@@ -6,9 +6,9 @@ if [ -z "$push_message" ]; then
 fi
 
 rm .config.tar.xz
-rm bin.tar.xz
+rm .local.tar.xz
 tar -cf .config.tar.xz .config/
-tar -cf bin.tar.xz bin/
+tar -cf .local.tar.xz .local/
 git add .
 git commit -m "$push_message"
 git push

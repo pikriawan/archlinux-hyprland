@@ -1,0 +1,20 @@
+{
+    "PRIMARY_BACKGROUND":   "#000000",
+    "PRIMARY_FOREGROUND":   "#aaaaaa",
+    "NORMAL_BLACK":         "#000000",
+    "NORMAL_RED":           "#aa0000",
+    "NORMAL_GREEN":         "#00aa00",
+    "NORMAL_YELLOW":        "#aa5500",
+    "NORMAL_BLUE":          "#0000aa",
+    "NORMAL_MAGENTA":       "#aa00aa",
+    "NORMAL_CYAN":          "#00aaaa",
+    "NORMAL_WHITE":         "#aaaaaa",
+    "BRIGHT_BLACK":         "#555555",
+    "BRIGHT_RED":           "#ff5555",
+    "BRIGHT_GREEN":         "#55ff55",
+    "BRIGHT_YELLOW":        "#ffff55",
+    "BRIGHT_BLUE":          "#5555ff",
+    "BRIGHT_MAGENTA":       "#ff55ff",
+    "BRIGHT_CYAN":          "#55ffff",
+    "BRIGHT_WHITE":         "#ffffff"
+}
