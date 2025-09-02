@@ -6,12 +6,14 @@ cd ~
 echo "Installing yay..."
 sudo pacman -S --needed --noconfirm base-devel git
 sudo pacman -S --needed --noconfirm --asdeps go rust
-git clone https://aur.archlinux.org/yay.git
-mv yay .yay
-cd .yay
+
+if [ ! -d "yay" ]; then
+    git clone https://aur.archlinux.org/yay.git
+fi
+
+cd yay
 makepkg -sirc --noconfirm
 cd ~
-rm -rf .yay
 
 echo "Installing packages..."
 yay -S --needed --noconfirm hyprland hyprpaper hypridle hyprlock xdg-desktop-portal-hyprland hyprpolkitagent uwsm libnewt dunst pipewire wireplumber qt5-wayland qt6-wayland inter-font ttf-jetbrains-mono noto-fonts ttf-noto-nerd waybar rofi-wayland cliphist nautilus xdg-desktop-portal-gtk wiremix grim slurp imagemagick wayfreeze-git brightnessctl speech-dispatcher espeakup jq gvfs wget tree man-db nodejs-lts-jod npm jdk-openjdk php apache php-apache mariadb alacritty htop blueberry visual-studio-code-bin firefox baobab decibels evince gnome-calculator gnome-calendar gnome-clocks gnome-disk-utility gnome-maps gnome-music gnome-text-editor gnome-weather loupe snapshot sushi totem file-roller
@@ -31,14 +33,14 @@ sed -i "s|@HOME@|$HOME|g" .config/hypr/hyprpaper.conf
 sed -i "s|@HOME@|$HOME|g" .config/hypr/hyprlock.conf
 sed -i "s|@HOME@|$HOME|g" .config/waybar/style.css
 
-echo "Copying executables..."
-curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/bin.tar.xz
+echo "Copying local files..."
+curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/.local.tar.xz
 tar -xf .local.tar.xz
 rm .local.tar.xz
 
 echo "Copying Material fonts..."
 mkdir -p .local/share/fonts/MaterialSymbolsOutlined
-curl -o .local/share/fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined_28pt-Regulat.ttf https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/MaterialSymbolsOutlined_28pt-Regular.ttf
+curl -o .local/share/fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined_28pt-Regular.ttf https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/MaterialSymbolsOutlined_28pt-Regular.ttf
 
 echo "Configuring applications..."
 
@@ -101,8 +103,12 @@ sudo tee /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 
 echo "Cleaning up..."
-yay -Rns --noconfirm $(yay -Qdtq)
+
+if [ ! -z "$(yay -Qdtq)" ]; then
+    yay -Rns --noconfirm $(yay -Qdtq)
+fi
+
 yay -Scc --noconfirm
-sudo rm -r .backup
+sudo rm -rf .backup
 
 echo "Installation finished. Please reboot the computer"
