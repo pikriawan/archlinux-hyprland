@@ -4,13 +4,14 @@ set -e
 cd ~
 
 echo "Installing yay..."
-sudo pacman -S --needed --noconfirm --asdeps go rust
 sudo pacman -S --needed --noconfirm base-devel git
-cd /tmp
+sudo pacman -S --needed --noconfirm --asdeps go rust
 git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si --noconfirm
+mv yay .yay
+cd .yay
+makepkg -sirc --noconfirm
 cd ~
+rm -rf .yay
 
 echo "Installing packages..."
 yay -S --needed --noconfirm hyprland hyprpaper hypridle hyprlock xdg-desktop-portal-hyprland hyprpolkitagent uwsm libnewt dunst pipewire wireplumber qt5-wayland qt6-wayland inter-font ttf-jetbrains-mono noto-fonts ttf-noto-nerd waybar rofi-wayland cliphist nautilus xdg-desktop-portal-gtk wiremix grim slurp imagemagick wayfreeze-git brightnessctl speech-dispatcher espeakup jq gvfs wget tree man-db nodejs-lts-jod npm jdk-openjdk php apache php-apache mariadb alacritty htop blueberry visual-studio-code-bin firefox baobab decibels evince gnome-calculator gnome-calendar gnome-clocks gnome-disk-utility gnome-maps gnome-music gnome-text-editor gnome-weather loupe snapshot sushi totem file-roller
@@ -53,26 +54,37 @@ sed -i 's/Exec=\/usr\/bin\/code --new-window %F/Exec=\/usr\/bin\/code --new-wind
 echo -e "extension=iconv\nextension=mysqli\nextension=pdo_mysql" | sudo tee /etc/php/conf.d/extensions.ini
 
 # Apache
-sudo sed -i 's/LoadModule mpm_event_module/#LoadModule mpm_event_module/g' /etc/httpd/conf/httpd.conf
-sudo sed -i 's/#LoadModule mpm_prefork_module/LoadModule mpm_prefork_module/g' /etc/httpd/conf/httpd.conf
-sudo sed -i 's/mod_rewrite.so/mod_rewrite.so\nLoadModule php_module modules\/libphp.so\nAddHandler php-script .php/g' /etc/httpd/conf/httpd.conf
-sudo sed -i 's/*.conf/*.conf\nInclude conf\/extra\/php_module.conf/g' /etc/httpd/conf/httpd.conf
+mkdir -p .backup
+
+if [ ! -f ".backup/httpd.conf" ]; then
+    sudo cp /etc/httpd/conf/httpd.conf .backup
+fi
+
+sed 's/LoadModule mpm_event_module/#LoadModule mpm_event_module/g' .backup/httpd.conf |
+sed 's/#LoadModule mpm_prefork_module/LoadModule mpm_prefork_module/g' |
+sed 's/mod_rewrite.so/mod_rewrite.so\nLoadModule php_module modules\/libphp.so\nAddHandler php-script .php/g' |
+sed 's/*.conf/*.conf\nInclude conf\/extra\/php_module.conf/g' |
+sudo tee /etc/httpd/conf/httpd.conf
 
 # MariaDB
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 sudo systemctl start mariadb.service
 sudo mariadb -u root <<EOF
-CREATE USER 'admin'@'localhost' IDENTIFIED BY '';
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 sudo systemctl stop mariadb.service
 
 # UWSM
-echo -e "\nif uwsm check may-start; then\n    exec uwsm start hyprland-uwsm.desktop > /dev/null\nfi" >> .bash_profile
+if [ ! -z "$(awk '/uwsm/ { print }')" ]; then
+    echo -e "\nif uwsm check may-start; then\n    exec uwsm start hyprland-uwsm.desktop > /dev/null\nfi" >> .bash_profile
+fi
 
 # PATH
-echo -e "\nexport PATH=\$HOME/.local/bin:\$PATH" >> .bashrc
+if [ ! -z "$(awk '/export/ { print }')" ]; then
+    echo -e "\nexport PATH=\$HOME/.local/bin:\$PATH" >> .bashrc
+fi
 
 # Speech dispatcher
 wpctl set-volume @DEFAULT_AUDIO_SINK@ 0
@@ -80,11 +92,17 @@ echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n" | spd-conf
 wpctl set-volume @DEFAULT_AUDIO_SINK@ 20%
 
 # Silent boot
-sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/#HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)\nHOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems)/g' /etc/mkinitcpio.conf
+if [ ! -f ".backup/mkinitcpio.conf" ]; then
+    sudo cp /etc/mkinitcpio.conf .backup
+fi
+
+sed 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/#HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)\nHOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems)/g' .backup/mkinitcpio.conf |
+sudo tee /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 
 echo "Cleaning up..."
 yay -Rns --noconfirm $(yay -Qdtq)
 yay -Scc --noconfirm
+sudo rm -r .backup
 
 echo "Installation finished. Please reboot the computer"
