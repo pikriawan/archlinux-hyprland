@@ -1,5 +1,5 @@
 #!/bin/bash
-selection=$(echo -e "Lock\nSuspend\nReboot\nShutdown" | rofi -dmenu -p "mode_off_on")
+selection=$(echo -e "Lock\nSuspend\nReboot\nShutdown" | rofi -dmenu -p "mode_off_on" -l 4)
 
 case $selection in
     "Lock")

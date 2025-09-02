@@ -5,7 +5,7 @@ screenshot() {
 
     mkdir -p $directory
 
-    selection=$(echo -e "Selection\nWindow\nScreen" | rofi -dmenu -p "screenshot_frame_2")
+    selection=$(echo -e "Selection\nWindow\nScreen" | rofi -dmenu -p "screenshot_frame_2" -l 3)
 
     case $selection in
         "Selection")
