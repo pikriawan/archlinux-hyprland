@@ -5,8 +5,8 @@ if [ -z "$push_message" ]; then
     push_message="update"
 fi
 
-rm .config.tar.xz
-rm .local.tar.xz
+rm -f .config.tar.xz
+rm -f .local.tar.xz
 tar -cf .config.tar.xz .config/
 tar -cf .local.tar.xz .local/
 git add .

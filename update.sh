@@ -11,7 +11,7 @@ sed -i "s|@HOME@|$HOME|g" .config/hypr/hyprlock.conf
 sed -i "s|@HOME@|$HOME|g" .config/waybar/style.css
 
 echo "Copying executables..."
-curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/local.tar.xz
+curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/.local.tar.xz
 tar -xf .local.tar.xz
 rm .local.tar.xz
 
