@@ -14,9 +14,9 @@ percentage=$(expr $current_volume \* 1)
 mute=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}')
 
 if [ "$mute" = "[MUTED]" ]; then
-    dunstify -a "Volume" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Volume: ${percentage}% (muted)"
+    dunstify -a "Volume" -i "audio-volume-medium" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Volume: ${percentage}% (muted)"
 else
-    dunstify -a "Volume" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Volume: ${percentage}%"
+    dunstify -a "Volume" -i "audio-volume-medium" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Volume: ${percentage}%"
 fi
 
 canberra-gtk-play -i audio-volume-change -d "volume"

@@ -23,6 +23,7 @@ yay -S --needed --noconfirm --asdeps pipewire-pulse gvfs-mtp noto-fonts-cjk noto
 echo "Enabling services..."
 sudo systemctl enable bluetooth.service
 systemctl --user enable hypridle.service
+systemctl --user enable hyprpolkitagent.service
 
 echo "Copying configurations..."
 curl -O https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/.config.tar.xz
@@ -79,12 +80,12 @@ EOF
 sudo systemctl stop mariadb.service
 
 # UWSM
-if [ ! -z "$(awk '/uwsm/ { print }')" ]; then
+if [ -z "$(grep 'uwsm' .bash_profile)" ]; then
     echo -e "\nif uwsm check may-start; then\n    exec uwsm start hyprland-uwsm.desktop > /dev/null\nfi" >> .bash_profile
 fi
 
 # PATH
-if [ ! -z "$(awk '/export/ { print }')" ]; then
+if [ -z "$(grep 'export' .bashrc)" ]; then
     echo -e "\nexport PATH=\$HOME/.local/bin:\$PATH" >> .bashrc
 fi
 
@@ -108,7 +109,7 @@ if [ ! -z "$(yay -Qdtq)" ]; then
     yay -Rns --noconfirm $(yay -Qdtq)
 fi
 
-yay -Scc --noconfirm
+yes | yay -Scc
 sudo rm -rf .backup
 
 echo "Installation finished. Please reboot the computer"

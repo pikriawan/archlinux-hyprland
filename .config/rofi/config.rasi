@@ -16,10 +16,9 @@ configuration {
 }
 
 window {
-    border: 1px;
-    border-color: #444b6a;
-    border-radius: 12px;
-    background-color: #1a1b26;
+    border: 2px;
+    border-color: #455159;
+    background-color: #24292e;
 }
 
 mainbox {
@@ -34,41 +33,32 @@ inputbar {
 
 prompt {
     font: "Material Symbols Outlined 28pt 16";
-    text-color: #444b6a;
+    text-color: #a4acb6;
     vertical-align: 0.5;
 }
 
 entry {
     font: "Inter 16";
-    text-color: #a9b1d6;
-    cursor-color: #444b6a;
-    placeholder: "Applications";
-    placeholder-color: #444b6a;
+    text-color: #d1d5da;
+    cursor-color: #a4acb6;
+    placeholder-color: #a4acb6;
     vertical-align: 0.5;
 }
 
 listview {
     lines: 8;
-    border: 1px 0 0 0;
-    border-color: #444b6a;
-    padding: 8px;
 }
 
 element {
-    padding: 8px;
-    border-radius: 8px;
+    padding: 8px 16px;
 }
 
 element selected {
-    background-color: #a9b1d6;
+    background-color: #455159;
 }
 
 element-text {
     font: "Inter 12";
-    text-color: #a9b1d6;
+    text-color: #d1d5da;
     highlight: none;
-}
-
-element-text selected {
-    text-color: #1a1b26;
 }

@@ -13,4 +13,4 @@ fi
 
 current_brightness=$(brightnessctl get)
 percentage=$(expr $(expr $current_brightness - $min_brightness) \* 100 / $(expr $max_brightness - $min_brightness))
-dunstify -a "Brightness" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Brightness: ${percentage}%"
+dunstify -a "Brightness" -i "weather-clear" -h string:x-dunst-stack-tag:$msg_tag -h int:value:"$percentage" "Brightness: ${percentage}%"

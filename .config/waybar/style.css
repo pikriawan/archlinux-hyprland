@@ -5,13 +5,13 @@
 }
 
 #waybar {
-    background-color: #1a1b26;
-    color: #a9b1d6;
+    background-color: #24292e;
+    color: #d1d5da;
 }
 
 #workspaces button {
     padding-left: 16px;
-    background-image: url("@HOME@/.config/waybar/icons/workspace.svg");
+    background-image: url("_home/.config/waybar/icons/workspace.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 8px;
@@ -24,7 +24,7 @@
 
 #workspaces button.active {
     padding-left: 32px;
-    background-image: url("@HOME@/.config/waybar/icons/workspace-active.svg");
+    background-image: url("_home/.config/waybar/icons/workspace-active.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 24px 8px;
@@ -42,7 +42,7 @@
 }
 
 #battery.charging {
-    color: #9ece6a;
+    color: #34d058;
 }
 
 #network {
@@ -76,12 +76,11 @@
 }
 
 tooltip {
-    background-color: #1a1b26;
-    box-shadow: 0 0 0 1px #444b6a inset;
-    border-radius: 12px;
+    background-color: #24292e;
+    box-shadow: 0 0 0 2px #455159 inset;
 }
 
 tooltip label {
     padding: 8px;
-    color: #a9b1d6;
+    color: #d1d5da;
 }
