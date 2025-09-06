@@ -41,7 +41,7 @@ rm .local.tar.xz
 
 echo "Copying Material fonts..."
 mkdir -p .local/share/fonts/MaterialSymbolsOutlined
-curl -o .local/share/fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined_28pt-Regular.ttf https://raw.githubusercontent.com/pikriawan/archlinux-hyprland/refs/heads/main/MaterialSymbolsOutlined_28pt-Regular.ttf
+curl -o .local/share/fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined_28pt-Regular.ttf https://github.com/pikriawan/archlinux-hyprland/raw/refs/heads/main/MaterialSymbolsOutlined_28pt-Regular.ttf
 
 echo "Configuring applications..."
 
