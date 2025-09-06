@@ -60,7 +60,7 @@
     "custom/app-launcher": {
         "format": "search",
         "tooltip-format": "App launcher",
-        "on-click": "rofi -show drun -drun-display-format {name}"
+        "on-click": "rofi -show drun -drun-display-format {name} -theme-str \"entry {placeholder: \\\"Apps\\\";}\""
     },
     "wireplumber": {
         "format": "{icon}",
